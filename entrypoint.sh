@@ -154,7 +154,7 @@ if is_true "$INPUT_PHPCS"; then
         https://github.com/beechit/TYPO3CMS.git "$CS_DIR"
     fi
 
-    SNIFFPOOL_DIR="$TOOL_CACHE/typo3-sniffpool"
+    SNIFFPOOL_DIR="$TOOL_CACHE/TYPO3SniffPool"
     if [[ ! -d "$SNIFFPOOL_DIR/.git" ]]; then
       debug "Downloading TYPO3 SniffPool"
       rm -rf "$SNIFFPOOL_DIR"
