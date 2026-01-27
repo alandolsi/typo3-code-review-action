@@ -1,0 +1,66 @@
+name: "TYPO3 Code Review"
+description: "Run TYPO3 CMS coding standards and security heuristics."
+author: "GitHub Marketplace"
+branding:
+  icon: "shield"
+  color: "orange"
+inputs:
+  path:
+    description: "Path to the repository or subdirectory to scan."
+    default: "."
+  phpcs:
+    description: "Run PHP_CodeSniffer with TYPO3 coding standards."
+    default: "true"
+  phpcs_version:
+    description: "PHP_CodeSniffer version to download (e.g., 3.9.0)."
+    default: "3.9.0"
+  coding_standards_ref:
+    description: "TYPO3 coding standards git ref or tag (e.g., main or v0.9.0)."
+    default: "main"
+  phpcs_standard:
+    description: "PHPCS standard name to use."
+    default: "TYPO3CMS"
+  fail_on_phpcs:
+    description: "Fail the action when PHPCS errors are detected."
+    default: "false"
+  security_checks:
+    description: "Run basic security heuristics (unsafe globals, deprecated APIs)."
+    default: "true"
+  exclude:
+    description: "Comma-separated directory names to exclude."
+    default: "vendor,node_modules,.git"
+  debug:
+    description: "Enable debug logging."
+    default: "false"
+outputs:
+  phpcs_errors:
+    description: "Number of PHPCS errors."
+    value: ${{ steps.review.outputs.phpcs_errors }}
+  phpcs_warnings:
+    description: "Number of PHPCS warnings."
+    value: ${{ steps.review.outputs.phpcs_warnings }}
+  security_critical:
+    description: "Number of critical security findings."
+    value: ${{ steps.review.outputs.security_critical }}
+  security_warnings:
+    description: "Number of security warning findings."
+    value: ${{ steps.review.outputs.security_warnings }}
+  security_notices:
+    description: "Number of security notice findings."
+    value: ${{ steps.review.outputs.security_notices }}
+runs:
+  using: "composite"
+  steps:
+    - id: review
+      shell: bash
+      run: ${{ github.action_path }}/entrypoint.sh
+      env:
+        INPUT_PATH: ${{ inputs.path }}
+        INPUT_PHPCS: ${{ inputs.phpcs }}
+        INPUT_PHPCS_VERSION: ${{ inputs.phpcs_version }}
+        INPUT_CODING_STANDARDS_REF: ${{ inputs.coding_standards_ref }}
+        INPUT_PHPCS_STANDARD: ${{ inputs.phpcs_standard }}
+        INPUT_FAIL_ON_PHPCS: ${{ inputs.fail_on_phpcs }}
+        INPUT_SECURITY_CHECKS: ${{ inputs.security_checks }}
+        INPUT_EXCLUDE: ${{ inputs.exclude }}
+        INPUT_DEBUG: ${{ inputs.debug }}
