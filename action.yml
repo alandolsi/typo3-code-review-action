@@ -15,8 +15,8 @@ inputs:
     description: "PHP_CodeSniffer version to download (e.g., 3.9.0)."
     default: "3.9.0"
   coding_standards_ref:
-    description: "TYPO3 coding standards git ref or tag (e.g., main or v0.9.0)."
-    default: "main"
+    description: "TYPO3CMS PHPCS standard git ref or tag (beechit/TYPO3CMS)."
+    default: "master"
   phpcs_standard:
     description: "PHPCS standard name to use."
     default: "TYPO3CMS"

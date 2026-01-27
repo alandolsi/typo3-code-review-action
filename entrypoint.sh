@@ -146,12 +146,23 @@ if is_true "$INPUT_PHPCS"; then
     fi
     chmod +x "$PHPCS_PHAR"
 
-    CS_DIR="$TOOL_CACHE/typo3-coding-standards-${INPUT_CODING_STANDARDS_REF}"
+    CS_DIR="$TOOL_CACHE/typo3cms-standard-${INPUT_CODING_STANDARDS_REF}"
     if [[ ! -d "$CS_DIR/.git" ]]; then
-      debug "Downloading TYPO3 coding standards ${INPUT_CODING_STANDARDS_REF}"
+      debug "Downloading TYPO3CMS PHPCS standard ${INPUT_CODING_STANDARDS_REF}"
       rm -rf "$CS_DIR"
       git clone --depth 1 --branch "$INPUT_CODING_STANDARDS_REF" \
-        https://github.com/TYPO3/coding-standards.git "$CS_DIR"
+        https://github.com/beechit/TYPO3CMS.git "$CS_DIR"
+    fi
+
+    SNIFFPOOL_DIR="$TOOL_CACHE/typo3-sniffpool"
+    if [[ ! -d "$SNIFFPOOL_DIR/.git" ]]; then
+      debug "Downloading TYPO3 SniffPool"
+      rm -rf "$SNIFFPOOL_DIR"
+      git clone --depth 1 https://github.com/Konafets/TYPO3SniffPool.git "$SNIFFPOOL_DIR"
+    fi
+
+    if [[ ! -d "$CS_DIR/TYPO3SniffPool" ]]; then
+      ln -s "$SNIFFPOOL_DIR" "$CS_DIR/TYPO3SniffPool"
     fi
 
     REPORT_FILE="$TOOL_CACHE/phpcs-report.json"

@@ -37,7 +37,7 @@ jobs:
 | `path` | `.` | Path to scan. |
 | `phpcs` | `true` | Run PHP_CodeSniffer with TYPO3 coding standards. |
 | `phpcs_version` | `3.9.0` | PHPCS version to download. |
-| `coding_standards_ref` | `main` | TYPO3 coding standards git ref/tag. |
+| `coding_standards_ref` | `master` | TYPO3CMS PHPCS standard git ref/tag (beechit/TYPO3CMS). |
 | `phpcs_standard` | `TYPO3CMS` | PHPCS standard name. |
 | `fail_on_phpcs` | `false` | Fail when PHPCS errors are found. |
 | `security_checks` | `true` | Run basic security heuristics. |
