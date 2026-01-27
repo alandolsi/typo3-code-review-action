@@ -165,9 +165,14 @@ if is_true "$INPUT_PHPCS"; then
       ln -s "$SNIFFPOOL_DIR" "$CS_DIR/TYPO3SniffPool"
     fi
 
+    STANDARDS_DIR="$TOOL_CACHE/phpcs-standards"
+    mkdir -p "$STANDARDS_DIR"
+    rm -rf "$STANDARDS_DIR/TYPO3CMS"
+    ln -s "$CS_DIR" "$STANDARDS_DIR/TYPO3CMS"
+
     REPORT_FILE="$TOOL_CACHE/phpcs-report.json"
     PHPCS_ARGS=(
-      --runtime-set installed_paths "$CS_DIR"
+      --runtime-set installed_paths "$STANDARDS_DIR"
       --standard="$INPUT_PHPCS_STANDARD"
       --report=json
       --report-file="$REPORT_FILE"
