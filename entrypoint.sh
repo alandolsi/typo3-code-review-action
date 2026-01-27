@@ -132,8 +132,17 @@ if is_true "$INPUT_PHPCS"; then
     PHPCS_PHAR="$TOOL_CACHE/phpcs-${INPUT_PHPCS_VERSION}.phar"
     if [[ ! -f "$PHPCS_PHAR" ]]; then
       debug "Downloading PHPCS ${INPUT_PHPCS_VERSION}"
-      curl -fsSL -o "$PHPCS_PHAR" \
-        "https://github.com/squizlabs/PHP_CodeSniffer/releases/download/${INPUT_PHPCS_VERSION}/phpcs.phar"
+      PHPCS_URL_PRIMARY="https://github.com/PHPCSStandards/PHP_CodeSniffer/releases/download/${INPUT_PHPCS_VERSION}/phpcs.phar"
+      PHPCS_URL_FALLBACK="https://github.com/squizlabs/PHP_CodeSniffer/releases/download/${INPUT_PHPCS_VERSION}/phpcs.phar"
+      rm -f "$PHPCS_PHAR"
+      if ! curl -fsSL -o "$PHPCS_PHAR" "$PHPCS_URL_PRIMARY"; then
+        debug "Primary PHPCS URL failed, trying fallback"
+        rm -f "$PHPCS_PHAR"
+        if ! curl -fsSL -o "$PHPCS_PHAR" "$PHPCS_URL_FALLBACK"; then
+          annotate error "" "" "" "Failed to download PHPCS ${INPUT_PHPCS_VERSION}."
+          exit 1
+        fi
+      fi
     fi
     chmod +x "$PHPCS_PHAR"
 
