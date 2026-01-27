@@ -5,6 +5,10 @@ GitHub Action that performs TYPO3 CMS (v11+) code review checks:
 - Basic TYPO3 security/deprecation heuristics
 - Emits GitHub Actions annotations
 
+## Status
+
+Early-stage MVP in a private testing phase.
+
 ## Usage
 
 ```yaml
@@ -59,5 +63,4 @@ jobs:
 ## Maintainer
 
 Landolsi Webdeisgn  
-Website: https://landolsi.de  
-Impressum: https://landolsi.de/impressum
+Website: https://landolsi.de
