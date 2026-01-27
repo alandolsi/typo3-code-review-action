@@ -4,11 +4,12 @@ set -euo pipefail
 INPUT_PATH="${INPUT_PATH:-.}"
 INPUT_PHPCS="${INPUT_PHPCS:-true}"
 INPUT_PHPCS_VERSION="${INPUT_PHPCS_VERSION:-3.9.0}"
-INPUT_CODING_STANDARDS_REF="${INPUT_CODING_STANDARDS_REF:-main}"
+INPUT_CODING_STANDARDS_REF="${INPUT_CODING_STANDARDS_REF:-master}"
 INPUT_PHPCS_STANDARD="${INPUT_PHPCS_STANDARD:-TYPO3CMS}"
 INPUT_FAIL_ON_PHPCS="${INPUT_FAIL_ON_PHPCS:-false}"
 INPUT_SECURITY_CHECKS="${INPUT_SECURITY_CHECKS:-true}"
 INPUT_EXCLUDE="${INPUT_EXCLUDE:-vendor,node_modules,.git}"
+INPUT_SNIFFPOOL_REF="${INPUT_SNIFFPOOL_REF:-0.0.2}"
 INPUT_DEBUG="${INPUT_DEBUG:-false}"
 
 is_true() {
@@ -154,11 +155,12 @@ if is_true "$INPUT_PHPCS"; then
         https://github.com/beechit/TYPO3CMS.git "$CS_DIR"
     fi
 
-    SNIFFPOOL_DIR="$TOOL_CACHE/TYPO3SniffPool"
+    SNIFFPOOL_DIR="$TOOL_CACHE/TYPO3SniffPool-${INPUT_SNIFFPOOL_REF}"
     if [[ ! -d "$SNIFFPOOL_DIR/.git" ]]; then
-      debug "Downloading TYPO3 SniffPool"
+      debug "Downloading TYPO3 SniffPool ${INPUT_SNIFFPOOL_REF}"
       rm -rf "$SNIFFPOOL_DIR"
-      git clone --depth 1 https://github.com/Konafets/TYPO3SniffPool.git "$SNIFFPOOL_DIR"
+      git clone --depth 1 --branch "$INPUT_SNIFFPOOL_REF" \
+        https://github.com/Konafets/TYPO3SniffPool.git "$SNIFFPOOL_DIR"
     fi
 
     if [[ ! -d "$CS_DIR/TYPO3SniffPool" ]]; then

@@ -17,6 +17,9 @@ inputs:
   coding_standards_ref:
     description: "TYPO3CMS PHPCS standard git ref or tag (beechit/TYPO3CMS)."
     default: "master"
+  sniffpool_ref:
+    description: "TYPO3SniffPool git ref or tag."
+    default: "0.0.2"
   phpcs_standard:
     description: "PHPCS standard name to use."
     default: "TYPO3CMS"
@@ -63,4 +66,5 @@ runs:
         INPUT_FAIL_ON_PHPCS: ${{ inputs.fail_on_phpcs }}
         INPUT_SECURITY_CHECKS: ${{ inputs.security_checks }}
         INPUT_EXCLUDE: ${{ inputs.exclude }}
+        INPUT_SNIFFPOOL_REF: ${{ inputs.sniffpool_ref }}
         INPUT_DEBUG: ${{ inputs.debug }}
