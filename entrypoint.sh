@@ -163,9 +163,8 @@ if is_true "$INPUT_PHPCS"; then
         https://github.com/Konafets/TYPO3SniffPool.git "$SNIFFPOOL_DIR"
     fi
 
-    if [[ ! -d "$CS_DIR/TYPO3SniffPool" ]]; then
-      ln -s "$SNIFFPOOL_DIR" "$CS_DIR/TYPO3SniffPool"
-    fi
+    rm -rf "$CS_DIR/TYPO3SniffPool"
+    ln -s "$SNIFFPOOL_DIR" "$CS_DIR/TYPO3SniffPool"
 
     STANDARDS_DIR="$TOOL_CACHE/phpcs-standards"
     mkdir -p "$STANDARDS_DIR"
