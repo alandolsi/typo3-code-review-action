@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="240" viewBox="0 0 1200 240" role="img" aria-label="TYPO3 Code Review Action">
+  <rect width="1200" height="240" fill="#faf9f5"/>
+  <rect width="1200" height="10" fill="#d97757"/>
+  <text x="600" y="120" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="40" fill="#141413">TYPO3 Code Review Action</text>
+  <text x="600" y="160" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="20" fill="#141413">TYPO3 CMS coding standards and security heuristics</text>
+</svg>

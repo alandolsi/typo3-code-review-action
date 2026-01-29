@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/brand-banner.svg" alt="TYPO3 Code Review Action" width="800" />
+</p>
+
 # TYPO3 Code Review Action
 
 GitHub Action that performs TYPO3 CMS (v11+) code review checks:
